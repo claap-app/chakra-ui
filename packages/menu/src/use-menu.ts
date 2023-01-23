@@ -170,7 +170,11 @@ export function useMenu(props: UseMenuProps = {}) {
   const focusFirstItem = React.useCallback(() => {
     const id = setTimeout(() => {
       if (initialFocusRef) {
-        initialFocusRef.current?.focus()
+        if (initialFocusRef.current) {
+          initialFocusRef.current.focus()
+          const index = descendants.indexOf(initialFocusRef.current)
+          setFocusedIndex(index)
+        }
       } else {
         const first = descendants.firstEnabled()
         if (first) setFocusedIndex(first.index)
