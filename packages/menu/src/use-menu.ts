@@ -630,7 +630,7 @@ export function useMenuItem(
     [onClose, onClickProp, menuCloseOnSelect, closeOnSelect],
   )
 
-  const onFocus = useCallback(
+  const onFocus = React.useCallback(
     (event: React.FocusEvent) => {
       onFocusProp?.(event)
       setFocusedIndex(index)
