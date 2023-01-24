@@ -5,6 +5,7 @@ import {
   useDisclosure,
   UseDisclosureProps,
   useFocusOnHide,
+  useFocusOnShow,
   useId,
   useIds,
   useOutsideClick,
@@ -37,7 +38,6 @@ import {
   removeItem,
 } from "@chakra-ui/utils"
 import * as React from "react"
-import { useFocusOnShow } from "./use-focus-on-show-v2"
 
 /* -------------------------------------------------------------------------------------------------
  * Create context to track descendants and their indices
@@ -170,23 +170,29 @@ export function useMenu(props: UseMenuProps = {}) {
 
   const focusFirstItem = React.useCallback(() => {
     const id = setTimeout(() => {
-      if (initialFocusRef) return
-
-      const first = descendants.firstEnabled()
-      if (first) setFocusedIndex(first.index)
+      if (initialFocusRef) {
+        if (initialFocusRef.current) {
+          initialFocusRef.current.focus()
+          const index = descendants.indexOf(
+            initialFocusRef.current as HTMLElement,
+          )
+          setFocusedIndex(index)
+        }
+      } else {
+        const first = descendants.firstEnabled()
+        if (first) setFocusedIndex(first.index)
+      }
     })
     timeoutIds.current.add(id)
   }, [descendants, initialFocusRef])
 
   const focusLastItem = React.useCallback(() => {
     const id = setTimeout(() => {
-      if (initialFocusRef) return
-
       const last = descendants.lastEnabled()
       if (last) setFocusedIndex(last.index)
     })
     timeoutIds.current.add(id)
-  }, [descendants, initialFocusRef])
+  }, [descendants])
 
   const onOpenInternal = React.useCallback(() => {
     onOpenProp?.()
