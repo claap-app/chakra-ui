@@ -4,8 +4,7 @@ import {
   isRefObject,
 } from "@chakra-ui/utils"
 import React, { useCallback, useRef } from "react"
-import { useUpdateEffect } from "@chakra-ui/hooks/src/use-update-effect"
-import { useSafeLayoutEffect } from "@chakra-ui/hooks/src/use-safe-layout-effect"
+import { useUpdateEffect, useSafeLayoutEffect } from "@chakra-ui/hooks"
 import { useEventListener } from "./use-event-listener-v2"
 
 export interface UseFocusOnShowOptions {
