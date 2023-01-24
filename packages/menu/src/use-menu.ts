@@ -5,6 +5,7 @@ import {
   useDisclosure,
   UseDisclosureProps,
   useFocusOnHide,
+  useFocusOnShowV2 as useFocusOnShow,
   useId,
   useIds,
   useOutsideClick,
@@ -12,7 +13,6 @@ import {
   useUnmountEffect,
   useUpdateEffect,
 } from "@chakra-ui/hooks"
-import { useFocusOnShow } from "@chakra-ui/hooks/src/use-focus-on-show-v2"
 import { useAnimationState } from "@chakra-ui/hooks/use-animation-state"
 import { usePopper, UsePopperProps } from "@chakra-ui/popper"
 import {

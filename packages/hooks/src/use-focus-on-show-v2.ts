@@ -8,19 +8,19 @@ import { useEventListener } from "./use-event-listener-v2"
 import { useUpdateEffect } from "./use-update-effect"
 import { useSafeLayoutEffect } from "./use-safe-layout-effect"
 
-export interface UseFocusOnShowOptions {
+export interface UseFocusOnShowV2Options {
   visible?: boolean
   shouldFocus?: boolean
   preventScroll?: boolean
   focusRef?: React.RefObject<FocusableElement>
 }
 
-const defaultOptions: UseFocusOnShowOptions = {
+const defaultOptions: UseFocusOnShowV2Options = {
   preventScroll: true,
   shouldFocus: false,
 }
 
-export function useFocusOnShow<T extends HTMLElement>(
+export function useFocusOnShowV2<T extends HTMLElement>(
   target: React.RefObject<T> | T,
   options = defaultOptions,
 ) {
