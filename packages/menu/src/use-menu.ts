@@ -5,6 +5,7 @@ import {
   useDisclosure,
   UseDisclosureProps,
   useFocusOnHide,
+  useFocusOnShow,
   useId,
   useIds,
   useOutsideClick,
@@ -169,27 +170,23 @@ export function useMenu(props: UseMenuProps = {}) {
 
   const focusFirstItem = React.useCallback(() => {
     const id = setTimeout(() => {
-      if (initialFocusRef) {
-        if (initialFocusRef.current) {
-          initialFocusRef.current.focus()
-          const index = descendants.indexOf(initialFocusRef.current)
-          setFocusedIndex(index)
-        }
-      } else {
-        const first = descendants.firstEnabled()
-        if (first) setFocusedIndex(first.index)
-      }
+      if (initialFocusRef) return
+
+      const first = descendants.firstEnabled()
+      if (first) setFocusedIndex(first.index)
     })
     timeoutIds.current.add(id)
   }, [descendants, initialFocusRef])
 
   const focusLastItem = React.useCallback(() => {
     const id = setTimeout(() => {
+      if (initialFocusRef) return
+
       const last = descendants.lastEnabled()
       if (last) setFocusedIndex(last.index)
     })
     timeoutIds.current.add(id)
-  }, [descendants])
+  }, [descendants, initialFocusRef])
 
   const onOpenInternal = React.useCallback(() => {
     onOpenProp?.()
@@ -199,6 +196,12 @@ export function useMenu(props: UseMenuProps = {}) {
       focusMenu()
     }
   }, [autoSelect, focusFirstItem, focusMenu, onOpenProp])
+
+  useFocusOnShow(menuRef, {
+    focusRef: initialFocusRef,
+    visible: isOpenProp,
+    shouldFocus: true,
+  })
 
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure({
     isOpen: isOpenProp,
