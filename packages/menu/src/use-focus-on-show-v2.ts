@@ -4,23 +4,23 @@ import {
   isRefObject,
 } from "@chakra-ui/utils"
 import React, { useCallback, useRef } from "react"
+import { useUpdateEffect } from "@chakra-ui/hooks/src/use-update-effect"
+import { useSafeLayoutEffect } from "@chakra-ui/hooks/src/use-safe-layout-effect"
 import { useEventListener } from "./use-event-listener-v2"
-import { useUpdateEffect } from "./use-update-effect"
-import { useSafeLayoutEffect } from "./use-safe-layout-effect"
 
-export interface UseFocusOnShowV2Options {
+export interface UseFocusOnShowOptions {
   visible?: boolean
   shouldFocus?: boolean
   preventScroll?: boolean
   focusRef?: React.RefObject<FocusableElement>
 }
 
-const defaultOptions: UseFocusOnShowV2Options = {
+const defaultOptions: UseFocusOnShowOptions = {
   preventScroll: true,
   shouldFocus: false,
 }
 
-export function useFocusOnShowV2<T extends HTMLElement>(
+export function useFocusOnShow<T extends HTMLElement>(
   target: React.RefObject<T> | T,
   options = defaultOptions,
 ) {

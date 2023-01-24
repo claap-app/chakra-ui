@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { useCallbackRef } from "./use-callback-ref"
+import { useCallbackRef } from "@chakra-ui/hooks"
 
 type Target = EventTarget | null | (() => EventTarget | null)
 type Options = boolean | AddEventListenerOptions

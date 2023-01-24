@@ -5,7 +5,6 @@ import {
   useDisclosure,
   UseDisclosureProps,
   useFocusOnHide,
-  useFocusOnShowV2 as useFocusOnShow,
   useId,
   useIds,
   useOutsideClick,
@@ -38,6 +37,7 @@ import {
   removeItem,
 } from "@chakra-ui/utils"
 import * as React from "react"
+import { useFocusOnShow } from "./use-focus-on-show-v2"
 
 /* -------------------------------------------------------------------------------------------------
  * Create context to track descendants and their indices
