@@ -124,6 +124,12 @@ export interface UseMenuProps
    * as it might affect scrolling performance.
    */
   computePositionOnMount?: boolean
+  /**
+   * If `true`, focus will be returned to the element that triggers the popover
+   * when it closes
+   * @default true
+   */
+  returnFocusOnClose?: boolean
 }
 
 /**
@@ -148,6 +154,7 @@ export function useMenu(props: UseMenuProps = {}) {
     lazyBehavior = "unmount",
     direction,
     computePositionOnMount = false,
+    returnFocusOnClose = true,
     ...popperProps
   } = props
   /**
@@ -250,7 +257,7 @@ export function useMenu(props: UseMenuProps = {}) {
   useFocusOnHide(menuRef, {
     focusRef: buttonRef,
     visible: isOpen,
-    shouldFocus: true,
+    shouldFocus: returnFocusOnClose,
   })
 
   const animationState = useAnimationState({ isOpen, ref: menuRef })
